@@ -115,8 +115,3 @@ def mcp_endpoint():
 @app.route('/', methods=['GET'])
 def health():
     return jsonify({"status": "running", "service": "rikkahub-mcp"})
-
-if __name__ == "__main__":
-    # 本地测试才走这里，Railway 部署不会走这里
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
