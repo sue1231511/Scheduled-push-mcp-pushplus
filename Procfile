@@ -1,1 +1,1 @@
-web: gunicorn rikkahub_mcp_server:app
+web: python rikkahub_mcp_server.py
