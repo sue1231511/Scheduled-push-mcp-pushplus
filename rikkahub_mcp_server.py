@@ -294,4 +294,25 @@ if __name__ == "__main__":
     print(f"RikkaHub MCP Server 启动在端口 {port}")
     print(f"MCP端点: /mcp")
     print(f"Server URL: {get_server_url()}")
-    app.run(host="0.0.0.0", port=port)
+    
+    # 使用Gunicorn启动而不是Flask开发服务器
+    from gunicorn.app.base import BaseApplication
+    
+    class StandaloneApplication(BaseApplication):
+        def __init__(self, app, options=None):
+            self.options = options or {}
+            self.application = app
+            super().__init__()
+        
+        def load_config(self):
+            for key, value in self.options.items():
+                self.cfg.set(key, value)
+        
+        def load(self):
+            return self.application
+    
+    options = {
+        'bind': f'0.0.0.0:{port}',
+        'workers': 1,
+    }
+    StandaloneApplication(app, options).run()
