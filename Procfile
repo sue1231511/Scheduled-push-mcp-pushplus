@@ -1,1 +1,1 @@
-web: python rikkahub_mcp_server.py
+python rikkahub_mcp_server.py
