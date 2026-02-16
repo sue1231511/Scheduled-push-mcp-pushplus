@@ -159,3 +159,4 @@ def mcp_endpoint():
 def health():
     """健康检查"""
     return jsonify({"status": "running", "service": "pushplus-wechat-mcp"})
+    
